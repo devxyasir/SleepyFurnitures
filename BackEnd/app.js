@@ -21,7 +21,8 @@ cloudinary.config({
 });
 
 const app = express();
-//  middlewares
+
+// middlewares
 app.use(cors({
   origin:"http://localhost:3000"
 }));
@@ -33,7 +34,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.status(200).send("<h1>Auffur,ecommerce server</h1> ");
+  res.status(200).send("<h1>Auffur, Ecommerce Server</h1>");
 });
 
 app.use("/api/v1/products", productRoute);
@@ -44,16 +45,18 @@ app.use("/api/v1/reviews", reviewRoute);
 app.use(errorHandler);
 app.use(pathNotFound);
 
-// clear admin token after 6 hours of inactivity
-setInterval(clearAdminJwt, 6 * 60 * 60 * 1000);
+// Clear admin token after 6 hours of inactivity
+setInterval(clearAdminJwt, 6 * 60 * 60 * 1000);  // Every 6 hours
 
 const port = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    await connectDb(process.env.MONGO_URI);
+    await connectDb(process.env.MONGO_URI);  // Connect to the database
     app.listen(port, () => console.log(`Server is listening on port ${port}`));
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error starting server:", error);
+  }
 };
   
 startServer();

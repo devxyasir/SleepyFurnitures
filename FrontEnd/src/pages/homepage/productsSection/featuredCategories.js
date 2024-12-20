@@ -1,20 +1,17 @@
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
-import bedroomCategoryBgImg from "../../../assets/bedRoomCategory.jpg";
-import kidsCategoryBgImg from "../../../assets/kidsCategory.jpg";
-import firstOrderCategoryBgImg from "../../../assets/firstOrderCategory.jpg";
-import livingRoomCategoryBgImg from "../../../assets/livingRoomCategory.jpg";
+import bedsCategoryImg from "../../../assets/bedsCategoryImg.jpg";
+import mattressesCategoryImg from "../../../assets/mattressesCategory.jpg";
 import { useNavigate } from "react-router-dom";
 
 export const FeaturedCategories = () => {
   const navigateShop = useNavigate();
 
-  const categoriesFaceArr = [
-    { title: "kids", src: kidsCategoryBgImg },
-    { title: "first order deal", src: firstOrderCategoryBgImg },
-    { title: "bedroom", src: bedroomCategoryBgImg },
-    { title: "living room", src: livingRoomCategoryBgImg },
+  const categoriesArr = [
+    { title: "Shop Beds", src: bedsCategoryImg },
+    { title: "Shop Mattresses", src: mattressesCategoryImg },
   ];
+
   return (
     <section className="my-20">
       <h2 className="text-[36px] text-center mb-10 font-bold mx-4">Featured Categories</h2>
@@ -23,7 +20,7 @@ export const FeaturedCategories = () => {
           return (
             <article
               key={index}
-              className="w-[90%] tablet:w-[88%] md:mx-0 md:w-[100%] mx-auto cursor-pointer basis-[45%]"
+              className="w-[92%] tablet:w-[88%] md:mx-0 md:w-[100%] mx-auto cursor-pointer basis-[45%]"
             >
               <div
                 style={{ backgroundImage: `url(${category.src})` }}
