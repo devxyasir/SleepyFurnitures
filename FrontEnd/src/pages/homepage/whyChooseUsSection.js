@@ -1,60 +1,84 @@
 import React from "react";
-import { FaTruck } from "react-icons/fa";
-import { AiOutlineSafety } from "react-icons/ai";
-import { BiUserVoice } from "react-icons/bi";
-import { TbDiscount2 } from "react-icons/tb";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTruck, faHeadset, faTags, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 
 export const WhyChooseUsSection = () => {
+  const iconStyles = [
+    {
+      backgroundColor: "#E0F7FA", // Light cyan
+      color: "#00ACC1", // Cyan for "Free Shipping"
+    },
+    {
+      backgroundColor: "#FCE4EC", // Light pink
+      color: "#E91E63", // Pink for "Customer Service"
+    },
+    {
+      backgroundColor: "#E8F5E9", // Light green
+      color: "#4CAF50", // Green for "Exclusive Offers"
+    },
+    {
+      backgroundColor: "#FFF3E0", // Light orange
+      color: "#FF9800", // Orange for "Secure Payment"
+    },
+  ];
+
+  const sharedIconStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    fontSize: "28px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  };
+
   return (
-    <div className="pt-20 pb-16 mb-20 bg-neutralColor w-[100%]">
-      <h2 className="text-[40px] text-center  font-bold ">Why choose us</h2>
-      <div className="flex items-start w-[18.5em] max-w-[92%] mx-auto gap-12  mt-10 flex-col tablet:w-[70%] md:flex-row md:w-[80%] md:flex-wrap md:justify-between">
-        <div className="flex w-[100%] md:basis-[45%]  items-start gap-4 tablet:gap-6 tablet:w-[90%] tablet:max-w-[384px]">
-          <div className="bg-primaryColor  p-8 rounded-[50%] mx-auto">
-            <FaTruck className="fill-secondaryColor w-9 h-9 md:w-12 md:h-12 tablet:w-12 tablet:h-12 " />
-          </div>
-          <div className="flex flex-col  gap-4">
-            <h4 className="text-[24px]  text-center font-bold font-RobotoCondensed">Free Shipping</h4>
-            <p className="text-center leading-[140%] text-to-be-wrapped">
-              We offer free shipping on all orders, so you can shop with confidence knowing that there are no hidden
-              costs."
+    <div className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          {/* Free Shipping */}
+          <div className="flex flex-col items-center">
+            <div style={{ ...sharedIconStyle, ...iconStyles[0] }}>
+              <FontAwesomeIcon icon={faTruck} />
+            </div>
+            <h4 className="text-lg font-semibold mt-4">Free Shipping</h4>
+            <p className="text-gray-600 text-sm">
+              Get your bed delivered at no extra cost, right to your doorstep.
             </p>
           </div>
-        </div>
-        <div className="flex w-[100%] md:basis-[45%] flex-row items-start gap-4  tablet:gap-6 tablet:w-[90%] tablet:max-w-[384px]">
-          <div className="bg-primaryColor  p-8 rounded-[50%] mx-auto">
-            <BiUserVoice className="fill-secondaryColor w-9 h-9 md:w-12 md:h-12 tablet:w-12 tablet:h-12  " />
+
+          {/* Customer Service */}
+          <div className="flex flex-col items-center">
+            <div style={{ ...sharedIconStyle, ...iconStyles[1] }}>
+              <FontAwesomeIcon icon={faHeadset} />
+            </div>
+            <h4 className="text-lg font-semibold mt-4">Customer Service</h4>
+            <p className="text-gray-600 text-sm">
+              We're here to ensure your complete satisfaction with every purchase.
+            </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="text-[24px]  text-center font-bold  font-RobotoCondensed">Customer Service</h4>
-            <span className="text-center leading-[140%] text-to-be-wrapped">
-              Our customer service team is available to help you with any issues or concerns. We're here to make sure
-              you are completely satisfied with your purchase
-            </span>
+
+          {/* Exclusive Offers */}
+          <div className="flex flex-col items-center">
+            <div style={{ ...sharedIconStyle, ...iconStyles[2] }}>
+              <FontAwesomeIcon icon={faTags} />
+            </div>
+            <h4 className="text-lg font-semibold mt-4">Exclusive Offers</h4>
+            <p className="text-gray-600 text-sm">
+              Discover exclusive deals and discounts only for our valued customers.
+            </p>
           </div>
-        </div>
-        <div className="flex w-[100%] md:basis-[45%] flex-row items-start gap-4 tablet:gap-6 tablet:w-[90%] tablet:max-w-[384px]">
-          <div className="bg-primaryColor  p-8 rounded-[50%] mx-auto">
-            <TbDiscount2 className="fill-secondaryColor w-9 h-9 md:w-12 md:h-12 tablet:w-12 tablet:h-12  " />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="text-[24px]  text-center font-bold font-RobotoCondensed">Exclusive Offers and Discounts</h4>
-            <span className="text-center leading-[140%] text-to-be-wrapped">
-              We're constantly updating our inventory with exclusive offers and products that you won't find anywhere
-              else. From limited-edition items to one-of-a-kind pieces, we have something for everyone
-            </span>
-          </div>
-        </div>
-        <div className="flex w-[100%] md:basis-[45%]  items-start gap-4 tablet:gap-6 tablet:w-[90%] tablet:max-w-[384px]">
-          <div className="bg-primaryColor  p-8 rounded-[50%] mx-auto">
-            <AiOutlineSafety className="fill-secondaryColor w-9 h-9 md:w-12 md:h-12 tablet:w-12 tablet:h-12  " />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="text-[24px]  text-center font-bold font-RobotoCondensed">Secure and safe payment</h4>
-            <span className="text-center leading-[140%] text-to-be-wrapped">
-              We offer a range of safe payment options, so you can shop with confidence knowing that your information is
-              protected every step of the way."
-            </span>
+
+          {/* Secure Payment */}
+          <div className="flex flex-col items-center">
+            <div style={{ ...sharedIconStyle, ...iconStyles[3] }}>
+              <FontAwesomeIcon icon={faShieldAlt} />
+            </div>
+            <h4 className="text-lg font-semibold mt-4">Secure Payment</h4>
+            <p className="text-gray-600 text-sm">
+              Shop with confidence knowing your payment is secure.
+            </p>
           </div>
         </div>
       </div>
