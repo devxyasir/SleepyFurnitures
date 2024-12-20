@@ -5,17 +5,24 @@ const { handleForgotPasswordClick, changePassword } = require("../controllers/pa
 const isTokenvalid = require("../controllers/isTokenValid");
 const resendEmailVerification = require("../controllers/resendEmailVerification");
 const { checkIfUserIsAnAdminMiddleware } = require("../middleware/adminAuthorisation.js");
+const postUserOrders = require("../controllers/Orders"); // Add order controller
 
 const router = express.Router();
 
-router.route("/verifyGmail/:task").get(handleEmailLinkClick);
-router.route("/isTokenValid").get(isTokenvalid);
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
-router.route("/resetPasswordLink/:task").get(handleEmailLinkClick);
-router.route("/changePassword").post(changePassword);
-router.route("/forgotPasswordClick").post(handleForgotPasswordClick);
-router.route("/resendEmailVerificationLink").post(resendEmailVerification);
-router.route("/deleteUser").delete(checkIfUserIsAnAdminMiddleware, deleteUser);
+ 
+
+// Guest access route: Place an order without login (order is guest-based or user-based after login)
+router.route("/orders/placeOrders").post(postUserOrders);
+
+// User authentication routes
+router.route("/verifyGmail/:task").get(handleEmailLinkClick); // Email verification link click
+router.route("/isTokenValid").get(isTokenvalid); // Token validation route
+router.route("/register").post(registerUser); // User registration
+router.route("/login").post(loginUser); // User login
+router.route("/resetPasswordLink/:task").get(handleEmailLinkClick); // Reset password link click
+router.route("/changePassword").post(changePassword); // Change password
+router.route("/forgotPasswordClick").post(handleForgotPasswordClick); // Forgot password
+router.route("/resendEmailVerificationLink").post(resendEmailVerification); // Resend email verification
+router.route("/deleteUser").delete(checkIfUserIsAnAdminMiddleware, deleteUser); // Admin route to delete user
 
 module.exports = router;

@@ -4,7 +4,6 @@ import { CheckoutForm } from "./checkoutForm";
 import { OrderSummary } from "./orderSummary";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { isTokenValidBeforeHeadingToRoute } from "../../utils/isTokenValidBeforeHeadingToARoute";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FullpageSpinnerLoader } from "../../components/loaders/spinnerIcon";
@@ -13,7 +12,6 @@ export const CheckoutPage = ({ setIsCartSectionActive }) => {
   const { cart } = useSelector((state) => state.wishlistAndCartSection);
 
   const {
-    isTokenValidLoader,
     userData: { email, username, country, city, address, postalCode, shippingMethod },
   } = useSelector((state) => state.userAuth);
 
@@ -49,9 +47,10 @@ export const CheckoutPage = ({ setIsCartSectionActive }) => {
     }
   }, [cart.length, navigate, setIsCartSectionActive]);
 
-  useEffect(() => {
-    isTokenValidBeforeHeadingToRoute(dispatch, navigate);
-  }, [dispatch, navigate]);
+  // The isTokenValidBeforeHeadingToRoute check is removed to bypass login requirement for checkout
+  // useEffect(() => {
+  //   isTokenValidBeforeHeadingToRoute(dispatch, navigate);
+  // }, [dispatch, navigate]);
 
   const orderDetails = {
     products: cart.map((products) => {
@@ -75,8 +74,8 @@ export const CheckoutPage = ({ setIsCartSectionActive }) => {
     try {
       await axios.post(`${serverUrl}orders/placeOrders`, { orderDetails });
 
-      toast("Order has successfully been placed,you can check profile page > orders to track order", {
-        type: "error",
+      toast("Order has successfully been placed, you can check profile page > orders to track order", {
+        type: "success",
         autoClose: 4000,
         position: "top-center",
       });
@@ -95,14 +94,14 @@ export const CheckoutPage = ({ setIsCartSectionActive }) => {
       });
     } catch (error) {
       toast(error.response.data?.message || error.message, {
-        type: error.message,
+        type: "error",
         autoClose: false,
         position: "top-center",
       });
     }
   };
 
-  if (isTokenValidLoader) {
+  if (false /*isTokenValidLoader*/) {  // Since we're skipping the login check, you can remove the loader part if no longer needed
     return <FullpageSpinnerLoader />;
   } else {
     return (

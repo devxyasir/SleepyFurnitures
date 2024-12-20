@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseOutline } from "react-icons/io5";
 import { FiHeart } from "react-icons/fi";
@@ -15,28 +14,26 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export const Header = ({ setIsWishlistActive, setIsCartSectionActive, isLargeScreen }) => {
   const [displayVerticalNavBar, setDisplayVerticalNavBar] = useState(false);
-
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [totalProductQuantityCart, setTotalProductQuantityCart] = useState(0);
 
   const { allProductsData, isLoading, loadingOrErrorMessage } = useSelector((state) => state.productsData);
-  const { isLoggedIn, userData } = useSelector((state) => state.userAuth);
+  const { isLoggedIn } = useSelector((state) => state.userAuth);
   const { wishlist, cart } = useSelector((state) => state.wishlistAndCartSection);
 
   const navigate = useNavigate();
   const navigateToSearchPage = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
 
-  // SEARCH ENTER BUTTON WONT WORK WHEN THE allProducts IS LOADING OR THERE IS AN ERROR
   const handleSearching = (e) => {
     if (isLoading && loadingOrErrorMessage === "Loading") {
-      toast("Hold on,while product is loading", {
+      toast("Hold on, while product is loading", {
         type: "warning",
         autoClose: 3000,
       });
     }
     if (isLoading && loadingOrErrorMessage !== "Loading") {
-      toast("Products couldnt be loaded", {
+      toast("Products couldn’t be loaded", {
         type: "error",
         autoClose: 3000,
       });
@@ -53,13 +50,11 @@ export const Header = ({ setIsWishlistActive, setIsCartSectionActive, isLargeScr
     }
   };
 
-  // on entering a new pathname these should be false
   useEffect(() => {
     setIsSearchClicked(false);
     setDisplayVerticalNavBar(false);
   }, [location.pathname]);
 
-  // large screens are big ipads, desktop and laptop screen starting from 768
   useEffect(() => {
     isLargeScreen && setDisplayVerticalNavBar(false);
   }, [isLargeScreen]);
@@ -72,102 +67,103 @@ export const Header = ({ setIsWishlistActive, setIsCartSectionActive, isLargeScr
     setTotalProductQuantityCart(total);
   }, [cart]);
 
-  // on user  or myaccount icon btn click
-  const handleMyAccountClick = async () => {
+  const handleMyAccountClick = () => {
     navigate("/profilePage/accountInformation");
   };
 
   return (
-    <header className="h-[80px] sticky top-0 z-[1000] bg-[#ffffff]">
-      <nav className="w-[100%] h-[100%] font-Roboto px-[4%] tablet:px-[6%] lg:px-[2%] xl:px-[4%] font-medium flex items-center justify-between shadow-[0px_0px_4px_0px_rgba(14,19,24,0.7)] ">
+    <header className="h-[70px] sticky top-0 z-[1000] bg-[#ffffff]">
+      <nav className="w-[100%] h-[100%] font-Roboto px-[3%] flex items-center justify-between shadow-[0px_0px_3px_0px_rgba(14,19,24,0.5)]">
+        {/* Logo */}
         <img
           src={logoDark}
           alt=""
-          className="w-[25%] cursor-pointer h-auto max-w-[120px]"
+          className="w-[20%] cursor-pointer h-auto max-w-[100px]"
           onClick={() => navigate("/")}
         />
-        {isLargeScreen && <NavTabs />}
-        <div className="flex items-center tablet:gap-4 gap-4  xl:gap-6 2xl:gap-7  md:gap-4 md:basis-[25%] lg:basis-auto text-[18px]">
-          <div className="xl:flex xl:items-center cursor-pointer" onClick={() => setIsSearchClicked(!isSearchClicked)}>
-            <div className="relative p-3  bg-neutralColor rounded-[50%]">
-              <BiSearch className="w-4 h-4 tablet:w-5 tablet:h-5 md:w-5 md:h-5  stroke-secondaryColor " />
+
+        {/* Navigation Tabs and Icons */}
+        <div className="flex items-center gap-3 md:gap-4">
+          {isLargeScreen && <NavTabs {...{ handleMyAccountClick }} />}
+          <div className="flex items-center gap-3">
+            <div
+              className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"
+              onClick={() => setIsSearchClicked(!isSearchClicked)}
+            >
+              <BiSearch className="w-4 h-4 stroke-secondaryColor" />
             </div>
-            <span className="text-[18px] hidden cursor-pointer xl:block">&nbsp; Search</span>
-          </div>
-          {isLargeScreen && (
-            <div className="xl:flex xl:items-center cursor-pointer" onClick={handleMyAccountClick}>
-              <div className="relative p-3 bg-neutralColor    rounded-[50%]">
-                <BiUser className="w-4 h-4 tablet:w-5 tablet:h-5 md:w-5 md:h-5   stroke-secondaryColor " />
+
+            {/* {isLargeScreen && (
+              <div
+                className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"
+                onClick={handleMyAccountClick}
+              >
+                <BiUser className="w-4 h-4 stroke-secondaryColor" />
               </div>
-              {isLoggedIn ? (
-                <span className="text-[18px] hidden cursor-pointer xl:block">&nbsp;{userData.username}</span>
-              ) : (
-                <span className="text-[18px] hidden cursor-pointer xl:block">&nbsp;Login/Register</span>
-              )}
-            </div>
-          )}
-          <div className="xl:flex xl:items-center cursor-pointer">
-            <div className="relative p-3 bg-neutralColor  rounded-[50%]" onClick={() => setIsWishlistActive(true)}>
-              <FiHeart className="w-4 h-4 tablet:w-5 tablet:h-5 md:w-5 md:h-5  stroke-secondaryColor" />
-              <span className="absolute text-[12px] top-[-4px] right-[-9px] z-10 bg-primaryColor text-white px-1 text-center  rounded-[50%]">
+            )} */}
+
+            <div
+              className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"
+              onClick={() => setIsWishlistActive(true)}
+            >
+              <FiHeart className="w-4 h-4 stroke-secondaryColor" />
+              <span className="absolute text-[10px] top-[-2px] right-[-6px] bg-primaryColor text-white px-1 rounded-[50%]">
                 {wishlist.length}
               </span>
             </div>
-            <span className="text-[18px] hidden cursor-pointer xl:block">&nbsp;Wishlist</span>
-          </div>
-          <div className="xl:flex xl:items-center cursor-pointer" onClick={() => setIsCartSectionActive(true)}>
-            <div className="relative p-3  bg-neutralColor rounded-[50%]">
-              <AiOutlineShoppingCart
-                className="w-4 h-4  tablet:w-5
-              tablet:h-5
-              md:w-5
-              md:h-5"
-              />
-              <span className="absolute text-[12px] top-[-4px] right-[-9px] z-10 bg-primaryColor text-white px-1 text-center  rounded-[50%]">
+
+            <div
+              className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"
+              onClick={() => setIsCartSectionActive(true)}
+            >
+              <AiOutlineShoppingCart className="w-4 h-4" />
+              <span className="absolute text-[10px] top-[-2px] right-[-6px] bg-primaryColor text-white px-1 rounded-[50%]">
                 {totalProductQuantityCart}
               </span>
             </div>
-            <span className="text-[18px] hidden cursor-pointer xl:block">&nbsp;Cart</span>
+
+            <button
+              className="p-2 bg-neutralColor md:hidden rounded-[10px]"
+              onClick={() => setDisplayVerticalNavBar(!displayVerticalNavBar)}
+            >
+              {displayVerticalNavBar ? (
+                <IoCloseOutline className="w-4 h-4" />
+              ) : (
+                <GiHamburgerMenu className="w-4 h-4" />
+              )}
+            </button>
           </div>
-          <button
-            className="p-3 bg-neutralColor md:hidden"
-            onClick={() => setDisplayVerticalNavBar(!displayVerticalNavBar)}
-          >
-            {displayVerticalNavBar ? (
-              <IoCloseOutline className="w-4 h-4 tablet:w-5 tablet:h-5 md:w-5 md:h-5  " />
-            ) : (
-              <GiHamburgerMenu className="w-4 h-4 tablet:w-5 tablet:h-5 md:w-5 md:h-5  " />
-            )}
-          </button>
         </div>
       </nav>
+
+      {/* Search Bar */}
       <AnimatePresence>
         {isSearchClicked && (
           <motion.div
             initial={{ height: 0 }}
-            animate={{ height: 45 }}
-            exit={{ height: "auto", transition: { duration: 0.3, ease: "easeOut" } }}
-            transition={{ type: "spring", stiffness: 100, dampness: 5 }}
-            className="w-[92%] lg: xl:w-[92%] tablet:w-[88%] absolute top-[100%] tablet:left-[6%] lg:w-[96%] left-[4%] lg:left-[2%] xl:left-[4%] bottom-auto searchBar h-[45px] bg-neutralColor text-secondaryColor z-50  shadow-[0_4px_6px_-2px_rgba(0,0,0,0.2)] flex justify-between"
+            animate={{ height: 40 }}
+            exit={{ height: 0, transition: { duration: 0.3, ease: "easeOut" } }}
+            className="absolute top-[100%] left-[3%] w-[94%] bg-neutralColor flex justify-between items-center h-[40px] shadow-[0_3px_5px_-2px_rgba(0,0,0,0.2)]"
           >
             <input
-              className="w-[85%] text-[18px] pl-6 h-[100%] bg-neutralColor border-none outline-none"
               type="search"
-              name=""
               placeholder="search ..."
-              id=""
+              className="w-[85%] h-[100%] pl-4 bg-neutralColor border-none outline-none text-[14px]"
             />
             <button
-              className="bg-primaryColor max-w-[100px] w-[15%] h-[100%] flex justify-center items-center"
+              className="w-[15%] h-[100%] bg-primaryColor flex items-center justify-center rounded-[10px]"
               onClick={(e) => handleSearching(e)}
             >
-              <BiSearch className="w-5 h-5 tablet:w-6 tablet:h-6 md:w-6 md:h-6" fill="white" />
+              <BiSearch className="w-5 h-5" fill="white" />
             </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <AnimatePresence>{displayVerticalNavBar && <NavTabs {...{ handleMyAccountClick }} />}</AnimatePresence>
+      {/* Vertical Navigation */}
+      <AnimatePresence>
+        {displayVerticalNavBar && <NavTabs {...{ handleMyAccountClick }} />}
+      </AnimatePresence>
     </header>
   );
 };
