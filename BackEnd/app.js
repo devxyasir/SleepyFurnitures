@@ -42,11 +42,11 @@ app.use("/api/v1/auth", authRoute);  // Authentication route
 app.use("/orders", ordersRoute);  // Order management route
 app.use("/api/v1/admin", adminRoute);  // Admin route
 
-// Log the request body for products (for debugging purposes)
-app.post("/api/v1/products", (req, res, next) => {
-  console.log("Received product data:", req.body);  // Log the request body
-  next();  // Call next middleware or route handler
-});
+// // Log the request body for products (for debugging purposes)
+// app.post("/api/v1/products", (req, res, next) => {
+//   console.log("Received product data:", req.body);  // Log the request body
+//   next();  // Call next middleware or route handler
+// });
 
 // Error handling middleware
 app.use(errorHandler);
