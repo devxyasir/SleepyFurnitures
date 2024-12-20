@@ -23,7 +23,7 @@ export const FeaturedCategories = () => {
           return (
             <article
               key={index}
-              className="w-[92%] tablet:w-[88%] md:mx-0 md:w-[100%] mx-auto cursor-pointer basis-[45%]"
+              className="w-[90%] tablet:w-[88%] md:mx-0 md:w-[100%] mx-auto cursor-pointer basis-[45%]"
             >
               <div
                 style={{ backgroundImage: `url(${category.src})` }}

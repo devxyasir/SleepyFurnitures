@@ -177,6 +177,9 @@ export const ProductDetailsPage = () => {
             >
               Buy Now
             </motion.button>
+
+            
+
           </div>
           <div className="flex-col flex gap-4">
             <h3 className="font-bold text-[20px] tracking-[0.5px]">Shipping Options</h3>
