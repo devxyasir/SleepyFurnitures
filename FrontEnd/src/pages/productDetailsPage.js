@@ -29,16 +29,14 @@ export const ProductDetailsPage = () => {
 
   const { productId } = useParams();
   const currentProduct = allProductsData.find((product) => product._id === productId);
-  const { _id, title, price, image, discountPercentValue, categories, stock, type, description } = currentProduct || {
+  const { _id, title, price, image, discountPercent, categories, stock, type, description } = currentProduct || {
     _id: "",
     title: "",
     price: "",
     image: "",
-    discountPercentValue: "",
-    categories: "",
+    discountPercent: "",
     stock: "",
     type: "",
-    description: "",
   };
 
   let subCategoriesArr = [];
@@ -77,7 +75,7 @@ export const ProductDetailsPage = () => {
     }
   };
 
-  let discountedPrice = price - (price * discountPercentValue) / 100;
+  let discountedPrice = price - (price * discountPercent) / 100;
   if (isLoading) {
     return <ProductLoader />;
   }
@@ -124,7 +122,7 @@ export const ProductDetailsPage = () => {
         <div className="lg:basis-[40%] mt-16 lg:mt-0 flex flex-col gap-6">
           <h2 className="text-[28px] font-bold tracking-[0.5px] capitalize text-gray-800">{title}</h2>
 
-          {discountPercentValue > 0 ? (
+          {discountPercent > 0 ? (
             <div className="flex gap-2">
               <h3 className="font-bold text-[24px] md:text-[28px] tracking-[1px] text-primaryColor">
                 ${discountedPrice.toFixed(2)} USD
