@@ -1,8 +1,9 @@
+// productRoute.js
 const express = require("express");
 const {
   getAllProducts,
   uploadProductImages,
-  createProducts,
+  createProducts,  // Handling the product creation
   getAspecificProduct,
   deleteAspecificProduct,
   searchProducts,
@@ -13,6 +14,7 @@ const { checkIfUserIsAnAdminMiddleware } = require("../middleware/adminAuthorisa
 
 const router = express.Router();
 
+// Route to create a new product
 router.route("/").post(checkIfUserIsAnAdminMiddleware, createProducts).get(getAllProducts);
 router.route("/upload").post(checkIfUserIsAnAdminMiddleware, uploadProductImages);
 router.route("/getProduct/:id").get(getAspecificProduct);
