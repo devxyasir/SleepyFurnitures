@@ -93,14 +93,14 @@ export const Header = ({ setIsWishlistActive, setIsCartSectionActive, isLargeScr
               <BiSearch className="w-4 h-4 stroke-secondaryColor" />
             </div>
 
-            {/* {isLargeScreen && (
+            {isLargeScreen && (
               <div
                 className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"
                 onClick={handleMyAccountClick}
               >
                 <BiUser className="w-4 h-4 stroke-secondaryColor" />
               </div>
-            )} */}
+            )}
 
             <div
               className="relative p-2 bg-neutralColor rounded-[10px] cursor-pointer"

@@ -4,45 +4,36 @@ const productSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Product's title is required"],
+      required: true,
+      trim: true,
     },
     price: {
       type: Number,
-      required: [true, "Product's price is required"],
+      required: true,
     },
     stock: {
       type: Number,
-      default: function () {
-        return !stock && 0;
-      },
-      required: [true, "Product's stock is required"],
+      required: true,
     },
-    discountPercentValue: {
+    discountPercent: {
       type: Number,
-      default: function () {
-        return !this.discountPercentValue && 0;
-      },
+      default: 0, // Discount is optional, default to 0 if not provided
     },
     image: {
-      type: String,
-      required: [true, "Product's image is required"],
+      type: String, // This will store the URL of the uploaded image
+      required: true,
     },
-    categories: {
-      "Featured Categories": { type: [String], enums: ["featured", "first order deal", "discounts"] },
-      location: { type: [String], enums: ["kitchen", "dining", "bedroom", "living room", "office"] },
-      features: { type: [String], enums: ["chairs", "tables", "sets", "cupboards", "lighting", "sofa"] },
-      others: { type: [String], enums: ["kids"] },
+    productType: {
+      type: String,
+      enum: ["Bed", "Mattress"], // You can add more types as needed
+      required: true,
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Adds createdAt and updatedAt fields
   }
 );
 
-module.exports = mongoose.model("Product", productSchema);
-// const productCategories = {
-//   "Featured Categories": ["featured", "first order deal", "discounts"],
-//   location: ["kitchen", "dining", "bedroom", "living room", "office"],
-//   features: ["chairs", "tables", "sets", "cupboards", "lighting", "sofa"],
-//   others: ["kids"],
-// };
+module.exports  = mongoose.model("Product", productSchema);
+
+
